@@ -139,7 +139,7 @@ Main::~Main()
 void Main::OnButtonClick(wxCommandEvent& evt) 
 {
 #pragma region Button Setup
-	if (evt.GetId() == 100)
+	if (evt.GetId() == 1000)
 	{
 		
 	}
@@ -152,8 +152,7 @@ void Main::OnButtonClick(wxCommandEvent& evt)
 	else if (evt.GetId() == 100)
 	{
 		//=
-		text->AppendText("=");
-		/*last = text->GetValue();
+		last = text->GetValue();
 		Op2 = wxAtof(last);
 
 		switch (Operators)
@@ -187,43 +186,39 @@ void Main::OnButtonClick(wxCommandEvent& evt)
 			Res = wxString::Format(wxT("%f"), ans);
 			text->SetValue(Res);
 			break;
-		}*/
+		}
 	}
 	else if (evt.GetId() == 101)
 	{
 		//+
-		text->AppendText("+");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		Op1 = wxAtof(first);
 		Operators = 1;
-		text->SetValue("0");*/
+		text->SetValue("0");
 	}
 	else if (evt.GetId() == 102)
 	{
 		//-
-		text->AppendText("-");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		Op1 = wxAtof(first);
 		Operators = 2;
-		text->SetValue("0");*/
+		text->SetValue("0");
 	}
 	else if (evt.GetId() == 103)
 	{
 		//*
-		text->AppendText("*");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		Op1 = wxAtof(first);
 		Operators = 3;
-		text->SetValue("0");*/
+		text->SetValue("0");
 	}
 	else if (evt.GetId() == 104)
 	{
 		// /
-		text->AppendText("/");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		Op1 = wxAtof(first);
 		Operators = 4;
-		text->SetValue("0");*/
+		text->SetValue("0");
 	}
 	else if (evt.GetId() == 105)
 	{
@@ -238,17 +233,15 @@ void Main::OnButtonClick(wxCommandEvent& evt)
 	else if (evt.GetId() == 107)
 	{
 		// %
-		text->AppendText("%");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		Op1 = wxAtof(first);
 		Operators = 5;
-		text->SetValue("0");*/
+		text->SetValue("0");
 	}
 	else if (evt.GetId() == 108)
 	{
 		// negative
-		text->AppendText("-");
-		/*first = text->GetValue();
+		first = text->GetValue();
 		text->Clear();
 		int checkNeg = wxAtof(first);
 		if (checkNeg > 0)
@@ -261,7 +254,7 @@ void Main::OnButtonClick(wxCommandEvent& evt)
 			ans = neg * -1;
 			negStr = wxString::Format(wxT("%g"), ans);
 			text->SetValue(negStr);
-		}*/
+		}
 	}
 	else if (evt.GetId() == 109)
 	{
