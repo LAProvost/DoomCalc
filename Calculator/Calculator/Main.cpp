@@ -34,6 +34,7 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Doom Calculator", wxPoint(200, 200), 
 {
 	SetBackgroundColour(wxColor(26, 21, 21));
 	wxFont font(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+
 	text = new wxTextCtrl(this, wxID_ANY, "", wxPoint(10, 10), wxSize(320, 60), wxTE_RIGHT);
 	text->SetFont(font);
 
