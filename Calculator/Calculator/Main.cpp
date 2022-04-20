@@ -1,4 +1,8 @@
 #include "Main.h"
+#include "Factory.h"
+#include <sstream>
+#include <string>
+#include <Iomanip>
 
 #pragma region Event Table
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
@@ -30,105 +34,32 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Doom Calculator", wxPoint(200, 200), 
 {
 	SetBackgroundColour(wxColor(26, 21, 21));
 	wxFont font(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
-	wxFont btnFont(15, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 
-#pragma region Toolbox
 	text = new wxTextCtrl(this, wxID_ANY, "", wxPoint(10, 10), wxSize(320, 60), wxTE_RIGHT);
-	backBtn = new wxButton(this, 99, "Clear", wxPoint(377, 10), wxSize(100, 60));
-	equalsBtn = new wxButton(this, 100, "=", wxPoint(377, 360), wxSize(100, 60));
-	addBtn = new wxButton(this, 101, "+", wxPoint(377, 290), wxSize(100, 60));
-	subtractBtn = new wxButton(this, 102, "-", wxPoint(377, 220), wxSize(100, 60));
-	multiplyBtn = new wxButton(this, 103, "*", wxPoint(377, 150), wxSize(100, 60));
-	divideBtn = new wxButton(this, 104, "/", wxPoint(377, 80), wxSize(100, 60));
-	binBtn = new wxButton(this, 105, "Binary", wxPoint(120, 80), wxSize(100, 60));
-	hexBtn = new wxButton(this, 106, "Hex", wxPoint(10, 80), wxSize(100, 60));
-	modBtn = new wxButton(this, 107, "%", wxPoint(230, 80), wxSize(100, 60));
-	negBtn = new wxButton(this, 108, "(-)", wxPoint(10, 360), wxSize(100, 60));
-	decBtn = new wxButton(this, 109, ".", wxPoint(230, 360), wxSize(100, 60));
-	btn0 = new wxButton(this, 0, "0", wxPoint(120, 360), wxSize(100, 60));
-	btn1 = new wxButton(this, 1, "1", wxPoint(10, 290), wxSize(100, 60));
-	btn2 = new wxButton(this, 2, "2", wxPoint(120, 290), wxSize(100, 60));
-	btn3 = new wxButton(this, 3, "3", wxPoint(230, 290), wxSize(100, 60));
-	btn4 = new wxButton(this, 4, "4", wxPoint(10, 220), wxSize(100, 60));
-	btn5 = new wxButton(this, 5, "5", wxPoint(120, 220), wxSize(100, 60));
-	btn6 = new wxButton(this, 6, "6", wxPoint(230, 220), wxSize(100, 60));
-	btn7 = new wxButton(this, 7, "7", wxPoint(10, 150), wxSize(100, 60));
-	btn8 = new wxButton(this, 8, "8", wxPoint(120, 150), wxSize(100, 60));
-	btn9 = new wxButton(this, 9, "9", wxPoint(230, 150), wxSize(100, 60));
-#pragma endregion
-
-#pragma region Font
 	text->SetFont(font);
-	backBtn->SetFont(btnFont);
-	equalsBtn->SetFont(btnFont);
-	addBtn->SetFont(btnFont);
-	subtractBtn->SetFont(btnFont);
-	multiplyBtn->SetFont(btnFont);
-	divideBtn->SetFont(btnFont);
-	binBtn->SetFont(btnFont);
-	hexBtn->SetFont(btnFont);
-	modBtn->SetFont(btnFont);
-	negBtn->SetFont(btnFont);
-	decBtn->SetFont(btnFont);
-	btn0->SetFont(btnFont);
-	btn1->SetFont(btnFont);
-	btn2->SetFont(btnFont);
-	btn3->SetFont(btnFont);
-	btn4->SetFont(btnFont);
-	btn5->SetFont(btnFont);
-	btn6->SetFont(btnFont);
-	btn7->SetFont(btnFont);
-	btn8->SetFont(btnFont);
-	btn9->SetFont(btnFont);
 
-#pragma endregion
-
-#pragma region Colors
-	btn0->SetBackgroundColour(wxColor(204, 25, 12));
-	btn1->SetBackgroundColour(wxColor(204, 25, 12));
-	btn2->SetBackgroundColour(wxColor(204, 25, 12));
-	btn3->SetBackgroundColour(wxColor(204, 25, 12));
-	btn4->SetBackgroundColour(wxColor(204, 25, 12));
-	btn5->SetBackgroundColour(wxColor(204, 25, 12));
-	btn6->SetBackgroundColour(wxColor(204, 25, 12));
-	btn7->SetBackgroundColour(wxColor(204, 25, 12));
-	btn8->SetBackgroundColour(wxColor(204, 25, 12));
-	btn9->SetBackgroundColour(wxColor(204, 25, 12));
-	backBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	equalsBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	addBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	subtractBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	multiplyBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	divideBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	binBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	hexBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	modBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	negBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	decBtn->SetBackgroundColour(wxColor(204, 25, 12));
-	//Foreground=============================================
-	btn0->SetForegroundColour(wxColor(235, 224, 223));
-	btn1->SetForegroundColour(wxColor(235, 224, 223));
-	btn2->SetForegroundColour(wxColor(235, 224, 223));
-	btn3->SetForegroundColour(wxColor(235, 224, 223));
-	btn4->SetForegroundColour(wxColor(235, 224, 223));
-	btn5->SetForegroundColour(wxColor(235, 224, 223));
-	btn6->SetForegroundColour(wxColor(235, 224, 223));
-	btn7->SetForegroundColour(wxColor(235, 224, 223));
-	btn8->SetForegroundColour(wxColor(235, 224, 223));
-	btn9->SetForegroundColour(wxColor(235, 224, 223));
-	backBtn->SetForegroundColour(wxColor(235, 224, 223));
-	equalsBtn->SetForegroundColour(wxColor(235, 224, 223));
-	addBtn->SetForegroundColour(wxColor(235, 224, 223));
-	subtractBtn->SetForegroundColour(wxColor(235, 224, 223));
-	multiplyBtn->SetForegroundColour(wxColor(235, 224, 223));
-	divideBtn->SetForegroundColour(wxColor(235, 224, 223));
-	binBtn->SetForegroundColour(wxColor(235, 224, 223));
-	hexBtn->SetForegroundColour(wxColor(235, 224, 223));
-	modBtn->SetForegroundColour(wxColor(235, 224, 223));
-	negBtn->SetForegroundColour(wxColor(235, 224, 223));
-	decBtn->SetForegroundColour(wxColor(235, 224, 223));
-#pragma endregion
-
+	Factory fact(this);
+	backBtn = fact.MakeClearBtn();
+	equalsBtn = fact.MakeEqualBtn();
+	addBtn = fact.MakeAddBtn();
+	subtractBtn = fact.MakeSubtractBtn();
+	multiplyBtn = fact.MakeMuiltBtn();
+	divideBtn = fact.MakeDivideBtn();
+	modBtn = fact.MakeModBtn();
+	negBtn = fact.MakeNegBtn();
+	decBtn = fact.MakeDecBtn();
+	binBtn = fact.MakeBinaryBtn();
+	hexBtn = fact.MakeHexBtn();
+	btn0 = fact.Make0Btn();
+	btn1 = fact.Make1Btn();
+	btn2 = fact.Make2Btn();
+	btn3 = fact.Make3Btn();
+	btn4 = fact.Make4Btn();
+	btn5 = fact.Make5Btn();
+	btn6 = fact.Make6Btn();
+	btn7 = fact.Make7Btn();
+	btn8 = fact.Make8Btn();
+	btn9 = fact.Make9Btn();
 }
 
 Main::~Main()
@@ -228,12 +159,31 @@ void Main::OnButtonClick(wxCommandEvent& evt)
 	else if (evt.GetId() == 105)
 	{
 		// Binary
+		first = text->GetValue();
+		Op1 = wxAtof(first);
 
+		int binary = 0, remainder, product = 1;
+		while (Op1 != 0)
+		{
+			remainder = (int)Op1 % 2;
+			binary = binary + (remainder * product);
+			Op1 = Op1 / 2;
+			product *= 10;
+		}
+		Res = wxString::Format(wxT("%f"), (float)binary);
+		text->SetValue(Res);
 	}
 	else if (evt.GetId() == 106)
 	{
 		// Hex
+		first = text->GetValue();
+		Op1 = wxAtof(first);
+		std::stringstream ss;
 
+		ss << std::hex << (int)Op1;
+		std::string hexed(ss.str());
+		text->SetValue("0x");
+		text->AppendText(hexed);
 	}
 	else if (evt.GetId() == 107)
 	{
