@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/wx.h"
+#include "Processor.h"
 
 class Main : public wxFrame
 {
@@ -11,6 +12,7 @@ public:
 
 public:
 	wxTextCtrl* text = nullptr;
+	Processor* proc = nullptr;
 	//============================
 	wxButton* backBtn = nullptr;
 	wxButton* equalsBtn = nullptr;
@@ -34,15 +36,5 @@ public:
 	wxButton* btn7 = nullptr;
 	wxButton* btn8 = nullptr;
 	wxButton* btn9 = nullptr;
-	//============================
-	int Operators;
-	float Op1;
-	float Op2;
-	float ans;
-	int neg;
-	wxString Res;
-	wxString first;
-	wxString last;
-	wxString negStr;
 };
 
