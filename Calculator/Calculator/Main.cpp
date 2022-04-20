@@ -1,8 +1,6 @@
 #include "Main.h"
 #include "Factory.h"
-#include <sstream>
-#include <string>
-#include <Iomanip>
+#include "Processor.h"
 
 #pragma region Event Table
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
@@ -33,12 +31,11 @@ wxEND_EVENT_TABLE();
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Doom Calculator", wxPoint(200, 200), wxSize(500, 470)) 
 {
 	SetBackgroundColour(wxColor(26, 21, 21));
-	wxFont font(25, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	proc = &Processor::getInstance();
+	proc->CreateTxtWindow(this);
 
-	text = new wxTextCtrl(this, wxID_ANY, "", wxPoint(10, 10), wxSize(320, 60), wxTE_RIGHT);
-	text->SetFont(font);
-
-	Factory fact(this);
+#pragma region Buttons
+	Factory fact = Factory(this);
 	backBtn = fact.MakeClearBtn();
 	equalsBtn = fact.MakeEqualBtn();
 	addBtn = fact.MakeAddBtn();
@@ -60,9 +57,15 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Doom Calculator", wxPoint(200, 200), 
 	btn7 = fact.Make7Btn();
 	btn8 = fact.Make8Btn();
 	btn9 = fact.Make9Btn();
+#pragma endregion
 }
 
 Main::~Main()
 {
 
+}
+
+void Main::OnButtonClick(wxCommandEvent& evt)
+{
+	proc->ButtonClick(evt);
 }
